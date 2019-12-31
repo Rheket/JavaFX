@@ -1,22 +1,38 @@
 package Controllers;
 
+import Module.Part;
+import Module.Inventory;
+import Module.InHouse;
+import Module.Product;
+
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public class MainWindowController {
-    public Button addPartsButton;
-    public Button deletePartsButton;
-    public Button modifyPartsButton;
-    public Button searchPartsButton;
-    public Button searchProductsButton;
-    public Button addProductsButton;
-    public Button modifyProductsButton;
-    public Button deleteProductsButton;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static Module.Inventory.getPartId;
+
+public class MainWindowController implements Initializable {
+
+    @FXML public Button addPartsButton;
+    @FXML public Button deletePartsButton;
+    @FXML public Button modifyPartsButton;
+    @FXML public Button searchPartsButton;
+    @FXML public Button searchProductsButton;
+    @FXML public Button addProductsButton;
+    @FXML public Button modifyProductsButton;
+    @FXML public Button deleteProductsButton;
 
     public void addParts(ActionEvent actionEvent) throws Exception{
 
@@ -79,4 +95,10 @@ public class MainWindowController {
     public void exitMainScreen(ActionEvent actionEvent) {
         System.exit(0);
     }
+
+    @Override
+    public void initialize (URL url, ResourceBundle rb) {
+
+    }
+
 }

@@ -1,27 +1,28 @@
 package Module;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
 
     private static ObservableList<Part> partInventory = FXCollections.observableArrayList();
-    private ObservableList<Product> productInventory = FXCollections.observableArrayList();
+    private static ObservableList<Product> productInventory = FXCollections.observableArrayList();
+
+    private static int partIdCount = 0;
 
     public ObservableList<Part> getPartInventory() {
         return partInventory;
     }
 
-    public void addPart(Part newPart) {
+    public static void addPart(Part newPart) {
         partInventory.add(newPart);
     }
 
-    public void addProduct(Product newProduct) {
+    public void addProduct (Product newProduct) {
         productInventory.add(newProduct);
     }
 
-    public void deletePart(Part part) {
+    public void deletePart (Part part) {
         partInventory.remove(part);
     }
 
@@ -45,5 +46,9 @@ public class Inventory {
         productInventory.set(productToUpdate, updateProduct);
     }
 
+    public static int getPartId() {
+        partIdCount += 1;
+        return partIdCount;
+    }
 
 }
