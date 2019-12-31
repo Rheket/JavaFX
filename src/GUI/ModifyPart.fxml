@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModifyPartController">
+    <children>
+        <HBox layoutX="179.0" layoutY="47.0" spacing="80.0">
+            <children>
+                <RadioButton mnemonicParsing="false" text="In-House" />
+                <RadioButton mnemonicParsing="false" text="Outsourced" />
+            </children>
+        </HBox>
+        <VBox layoutX="95.0" layoutY="118.0" spacing="30.0">
+            <children>
+                <Label text="ID" />
+                <Label text="Name" />
+                <Label text="Inv" />
+                <Label text="Price/Cost" />
+                <Label text="Max" />
+                <Label text="Machine ID" />
+            </children>
+        </VBox>
+        <Label layoutX="328.0" layoutY="307.0" prefHeight="17.0" prefWidth="23.0" text="Min" />
+        <HBox layoutX="449.0" layoutY="389.0" spacing="20.0">
+            <children>
+                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveModifyPart" prefHeight="40.0" prefWidth="71.0" text="Save" />
+                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelModifyPart" prefHeight="40.0" prefWidth="79.0" text="Cancel" />
+            </children>
+        </HBox>
+        <Label layoutX="53.0" layoutY="40.0" text="Modify Part" textFill="#400abc">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <VBox layoutX="221.0" layoutY="118.0" spacing="21.0">
+            <children>
+                <TextField prefHeight="25.0" prefWidth="130.0" />
+                <TextField prefHeight="25.0" prefWidth="130.0" />
+                <TextField prefHeight="25.0" prefWidth="130.0" />
+                <TextField prefHeight="25.0" prefWidth="130.0" />
+            </children>
+        </VBox>
+        <TextField layoutX="221.0" layoutY="305.0" prefHeight="25.0" prefWidth="86.0" />
+        <TextField layoutX="369.0" layoutY="305.0" prefHeight="25.0" prefWidth="86.0" />
+        <TextField layoutX="221.0" layoutY="350.0" prefHeight="25.0" prefWidth="104.0" />
+    </children>
+</AnchorPane>
