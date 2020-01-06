@@ -31,7 +31,7 @@
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-            <Button fx:id="addPartsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addParts" prefHeight="40.0" prefWidth="80.0" text="Add">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addParts" prefHeight="40.0" prefWidth="80.0" text="Add">
                 <font>
                     <Font size="14.0" />
                 </font>
@@ -48,7 +48,7 @@
             </Button>
         </HBox>
         <HBox alignment="CENTER_LEFT" layoutX="231.0" layoutY="20.0" spacing="10.0">
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchParts" prefHeight="40.0" prefWidth="80.0" text="Search">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSearchParts" prefHeight="40.0" prefWidth="80.0" text="Search">
                 <font>
                     <Font size="14.0" />
                 </font>

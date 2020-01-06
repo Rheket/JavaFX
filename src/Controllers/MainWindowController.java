@@ -114,9 +114,11 @@ public class MainWindowController implements Initializable {
 
     }
 
-    public void searchParts(ActionEvent event) {
+    @FXML
+    public void handleSearchParts() {
 
         String search = partToSearch.getText();
+
         ObservableList foundParts = Inventory.searchPart(search);
         if (foundParts.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -154,36 +156,27 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize (URL url, ResourceBundle rb) {
 
-
+        //initialize parts
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("partId"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("partName"));
         partInvColumn.setCellValueFactory(new PropertyValueFactory<>("partInv"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
 
         partsTableView.setItems(Inventory.partInventory);
-        //partsTableView.setItems(addTheParts());
 
-        Inventory.addPart(new InHouse(Inventory.getPartId(), "Handle Bars", 50, 49.99, 50, 1, 1));
-        Inventory.addPart(new InHouse(Inventory.getPartId(), "Wheels", 100, 24.99, 100, 1, 2));
+        //Inventory.addPart(new InHouse(Inventory.getPartId(), "Handle Bars", 50, 49.99, 50, 1, 1));
+        //Inventory.addPart(new InHouse(Inventory.getPartId(), "Wheels", 100, 24.99, 100, 1, 2));
 
+        //initialize products
+        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        productInvColumn.setCellValueFactory(new PropertyValueFactory<>("productInv"));
+        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("productPrice"));
 
-    }
-
-    /*
-    public ObservableList<Part> addTheParts() {
-
-        ObservableList<Part> parts = FXCollections.observableArrayList();
-
-        parts.add(new Part(1, "Wheel", 2, 3.0));
-        parts.add(new Part(2, "Handle Bar", 12, 7.0));
-        parts.add(new Part(3, "Tire tube", 21, 9.0));
-        parts.add(new Part(4, "Light", 15, 12.0));
-
-        return parts;
-
+        productTableView.setItems(Inventory.productInventory);
 
     }
-    */
+
 
 
 }

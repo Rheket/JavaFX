@@ -28,7 +28,6 @@ public class AddPartController implements Initializable {
     @FXML private RadioButton outsourcedRadioButton;
 
     private ToggleGroup outsourcedToggleGroup;
-    private boolean isInHouse;
 
     //gather input
     @FXML private TextField partId;
@@ -67,11 +66,11 @@ public class AddPartController implements Initializable {
 
             if (this.partId.getText().length() == 0) {
                 p.setPartId(Inventory.getPartId());
-                Inventory.addPart(p);
             } else {
                 p.setPartId(Integer.parseInt(this.partId.getText()));
-                Inventory.addPart(p);
             }
+            Inventory.addPart(p);
+
 
         } else {
             Outsourced o = new Outsourced();
@@ -85,11 +84,10 @@ public class AddPartController implements Initializable {
 
             if (this.partId.getText().length() == 0) {
                 o.setPartId(Inventory.getPartId());
-                Inventory.addPart(o);
             } else {
                 o.setPartId(Integer.parseInt(this.partId.getText()));
-                Inventory.addPart(o);
             }
+            Inventory.addPart(o);
         }
 
         //getInput.add(new Part(pId, pName, pPrice, pInv, pMax, pMin, pMC));
@@ -114,13 +112,11 @@ public class AddPartController implements Initializable {
         if
             (this.outsourcedToggleGroup.getSelectedToggle().equals(inHouseRadioButton))
             machineIdLabel.setText("Machine ID");
-            isInHouse = true;
 
 
         if
             (this.outsourcedToggleGroup.getSelectedToggle().equals(outsourcedRadioButton))
             machineIdLabel.setText("Company Name");
-            isInHouse = false;
 
     }
 
@@ -131,7 +127,7 @@ public class AddPartController implements Initializable {
     public void initialize (URL url, ResourceBundle rb) {
 
         machineIdLabel.setText("Machine ID");
-
+        inHouseRadioButton.setSelected(true);
         outsourcedToggleGroup = new ToggleGroup();
         this.inHouseRadioButton.setToggleGroup(outsourcedToggleGroup);
         this.outsourcedRadioButton.setToggleGroup(outsourcedToggleGroup);

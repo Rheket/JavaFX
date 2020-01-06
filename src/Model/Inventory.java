@@ -31,6 +31,7 @@ public class Inventory {
     }
 
     public static ObservableList searchPart(String searchPartName) {
+
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
 
         if (searchPartName.length() == 0) {
@@ -100,8 +101,8 @@ public class Inventory {
 
     }
 
-    public static void updatePart(int index, Part updatePart) {
-        partInventory.set(index, updatePart);
+    public static void updatePart(int index, Part part) {
+        partInventory.set(index, part);
     }
 
     public static void updateProduct(int productToUpdate, Product updateProduct) {

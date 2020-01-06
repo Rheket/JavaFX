@@ -2,12 +2,16 @@ package Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class AddProductController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddProductController implements Initializable {
 
     public void saveProductButton(ActionEvent actionEvent) {
     }
@@ -29,4 +33,8 @@ public class AddProductController {
     public void addProductButton(ActionEvent actionEvent) {
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
