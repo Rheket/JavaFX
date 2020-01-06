@@ -1,9 +1,8 @@
 package Controllers;
 
-import Module.Part;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Model.InHouse;
+import Model.Inventory;
+import Model.Outsourced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,38 +10,34 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class AddPartController implements Initializable {
 
-    @FXML private TextField idTextField;
-    @FXML private TextField nameTextField;
-    @FXML private TextField invTextField;
-    @FXML private TextField priceCostTextField;
-    @FXML private TextField maxTextField;
-    @FXML private TextField minTextField;
-    @FXML private TextField machineIdTextField;
-    @FXML private TextField companyNameTextField;
-
     @FXML private Label machineIdLabel;
     @FXML private RadioButton inHouseRadioButton;
     @FXML private RadioButton outsourcedRadioButton;
 
     private ToggleGroup outsourcedToggleGroup;
-    private boolean toggleInHouse;
+    private boolean isInHouse;
 
-    //set up table
-    @FXML private TableView<Part> tableView;
-    @FXML private TableColumn<Part, Integer> partIdColumn;
-    @FXML private TableColumn<Part, String> partNameColumn;
-    @FXML private TableColumn<Part, Integer> partInvColumn;
-    @FXML private TableColumn<Part, Integer> partPriceColumn;
+    //gather input
+    @FXML private TextField partId;
+    @FXML private TextField partName;
+    @FXML private TextField partInv;
+    @FXML private TextField partPrice;
+    @FXML private TextField partMax;
+    @FXML private TextField partMin;
+    @FXML private TextField partMachOrCompID;
 
 
     public void cancelAddPart(ActionEvent actionEvent) throws Exception{
@@ -56,16 +51,58 @@ public class AddPartController implements Initializable {
 
     }
 
-    public void saveAddPart(ActionEvent actionEvent) {
+    public void saveAddPart(ActionEvent actionEvent) throws IOException {
 
-        //Columns in Table
-        partIdColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("Part ID"));
-        partNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("Part Name"));
-        partInvColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("Part Inventory Level"));
-        partPriceColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("Part Price/Cost per Unit"));
+        if (this.outsourcedToggleGroup.getSelectedToggle().equals(this.inHouseRadioButton)) {
 
-        //Add data for testing
-        tableView.setItems(getParts());
+            InHouse p = new InHouse();
+
+            p.setPartId(Integer.parseInt(partId.getText()));
+            p.setPartName(this.partName.getText());
+            p.setPartInv(Integer.parseInt(this.partInv.getText()));
+            p.setPartPrice(Double.parseDouble(this.partPrice.getText()));
+            p.setPartMax(Integer.parseInt(this.partMax.getText()));
+            p.setPartMin(Integer.parseInt(this.partMin.getText()));
+            p.setMachineId(Integer.parseInt(this.partMachOrCompID.getText()));
+
+            if (this.partId.getText().length() == 0) {
+                p.setPartId(Inventory.getPartId());
+                Inventory.addPart(p);
+            } else {
+                p.setPartId(Integer.parseInt(this.partId.getText()));
+                Inventory.addPart(p);
+            }
+
+        } else {
+            Outsourced o = new Outsourced();
+
+            o.setPartName(this.partName.getText());
+            o.setPartInv(Integer.parseInt(this.partInv.getText()));
+            o.setPartPrice(Double.parseDouble(this.partPrice.getText()));
+            o.setPartMax(Integer.parseInt(this.partMax.getText()));
+            o.setPartMin(Integer.parseInt(this.partMin.getText()));
+            o.setCompanyName(this.partMachOrCompID.getText());
+
+            if (this.partId.getText().length() == 0) {
+                o.setPartId(Inventory.getPartId());
+                Inventory.addPart(o);
+            } else {
+                o.setPartId(Integer.parseInt(this.partId.getText()));
+                Inventory.addPart(o);
+            }
+        }
+
+        //getInput.add(new Part(pId, pName, pPrice, pInv, pMax, pMin, pMC));
+
+        //
+        // MainWindowController.partsTableView.setItems(getInput);
+
+        Parent addPartParent = FXMLLoader.load(getClass().getResource("/GUI/MainWindow.fxml"));
+        Scene addPartScene = new Scene(addPartParent);
+
+        Stage addPartWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        addPartWindow.setScene(addPartScene);
+        addPartWindow.show();
 
     }
 
@@ -74,11 +111,16 @@ public class AddPartController implements Initializable {
      */
     public void radioButtonChanged() {
 
-        if (this.outsourcedToggleGroup.getSelectedToggle().equals(inHouseRadioButton))
+        if
+            (this.outsourcedToggleGroup.getSelectedToggle().equals(inHouseRadioButton))
             machineIdLabel.setText("Machine ID");
+            isInHouse = true;
 
-        if (this.outsourcedToggleGroup.getSelectedToggle().equals(outsourcedRadioButton))
+
+        if
+            (this.outsourcedToggleGroup.getSelectedToggle().equals(outsourcedRadioButton))
             machineIdLabel.setText("Company Name");
+            isInHouse = false;
 
     }
 
@@ -97,17 +139,6 @@ public class AddPartController implements Initializable {
 
     }
 
-    /*
-     * return observable list of parts
-     */
-    public ObservableList<Part> getParts() {
-
-        ObservableList<Part> part = FXCollections.observableArrayList();
-        //part.add(new Part(10,"Socks",15,5, 1, 100, "1"));
-
-        return part;
-
-    }
 
 
 }

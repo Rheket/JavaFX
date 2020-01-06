@@ -41,26 +41,26 @@
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="deletePartsButton" mnemonicParsing="false" onAction="#deleteParts" prefHeight="40.0" prefWidth="80.0" text="Delete">
+            <Button mnemonicParsing="false" onAction="#deleteParts" prefHeight="40.0" prefWidth="80.0" text="Delete">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
         </HBox>
         <HBox alignment="CENTER_LEFT" layoutX="231.0" layoutY="20.0" spacing="10.0">
-            <Button fx:id="searchPartsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchParts" prefHeight="40.0" prefWidth="80.0" text="Search">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchParts" prefHeight="40.0" prefWidth="80.0" text="Search">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
-            <TextField />
+            <TextField fx:id="partToSearch" />
         </HBox>
         <TableView fx:id="partsTableView" layoutX="20.0" layoutY="70.0" prefHeight="100.0" prefWidth="450.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="Part ID" />
-                <TableColumn prefWidth="75.0" text="Part Name" />
-                <TableColumn prefWidth="75.0" text="Inventory Level" />
-                <TableColumn prefWidth="75.0" text="Price/Cost per Unit" />
+                <TableColumn fx:id="partIdColumn" prefWidth="75.0" text="Part ID" />
+                <TableColumn fx:id="partNameColumn" prefWidth="75.0" text="Part Name" />
+                <TableColumn fx:id="partInvColumn" prefWidth="75.0" text="Inventory Level" />
+                <TableColumn fx:id="partPriceColumn" prefWidth="75.0" text="Price/Cost per Unit" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
