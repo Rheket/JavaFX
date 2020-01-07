@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModifyPartController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModifyPartController">
     <children>
         <HBox layoutX="179.0" layoutY="47.0" spacing="80.0">
             <children>
@@ -30,8 +30,8 @@
         <Label layoutX="328.0" layoutY="307.0" prefHeight="17.0" prefWidth="23.0" text="Min" />
         <HBox layoutX="449.0" layoutY="389.0" spacing="20.0">
             <children>
-                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveModifyPart" prefHeight="40.0" prefWidth="71.0" text="Save" />
-                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelModifyPart" prefHeight="40.0" prefWidth="79.0" text="Cancel" />
+                <Button mnemonicParsing="false" onAction="#saveModifyPart" prefHeight="40.0" prefWidth="71.0" text="Save" />
+                <Button mnemonicParsing="false" onAction="#cancelModifyPart" prefHeight="40.0" prefWidth="79.0" text="Cancel" />
             </children>
         </HBox>
         <Label layoutX="53.0" layoutY="40.0" text="Modify Part" textFill="#400abc">
@@ -41,14 +41,14 @@
         </Label>
         <VBox layoutX="221.0" layoutY="118.0" spacing="21.0">
             <children>
-                <TextField prefHeight="25.0" prefWidth="130.0" />
-                <TextField prefHeight="25.0" prefWidth="130.0" />
-                <TextField prefHeight="25.0" prefWidth="130.0" />
-                <TextField prefHeight="25.0" prefWidth="130.0" />
+                <TextField fx:id="modifyPartId" prefHeight="25.0" prefWidth="130.0" />
+                <TextField fx:id="modifyPartName" prefHeight="25.0" prefWidth="130.0" />
+                <TextField fx:id="modifyPartInv" prefHeight="25.0" prefWidth="130.0" />
+                <TextField fx:id="modifyPartPrice" prefHeight="25.0" prefWidth="130.0" />
             </children>
         </VBox>
-        <TextField layoutX="221.0" layoutY="305.0" prefHeight="25.0" prefWidth="86.0" />
-        <TextField layoutX="369.0" layoutY="305.0" prefHeight="25.0" prefWidth="86.0" />
-        <TextField layoutX="221.0" layoutY="350.0" prefHeight="25.0" prefWidth="104.0" />
+        <TextField fx:id="modifyPartMax" layoutX="221.0" layoutY="305.0" prefHeight="25.0" prefWidth="86.0" />
+        <TextField fx:id="modifyPartMin" layoutX="369.0" layoutY="305.0" prefHeight="25.0" prefWidth="86.0" />
+        <TextField fx:id="modifyPartMachOrCompID" layoutX="221.0" layoutY="350.0" prefHeight="25.0" prefWidth="104.0" />
     </children>
 </AnchorPane>

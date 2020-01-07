@@ -11,6 +11,10 @@ public class Part {
     private int partMin;
     private int partMax;
 
+    public Part() {
+        this(0, null, 0, 0.0, 0, 0);
+    }
+
     public Part(int partId, String partName, int partInv, double partPrice, int partMax, int partMin) {
 
         this.partId = partId;
@@ -20,19 +24,8 @@ public class Part {
         this.partMax = partMax;
         this.partMin = partMin;
 
-        //this.machineId = new SimpleStringProperty();
-
     }
-/*
-    public Part(int partId, String partName, int partInv, double partPrice) {
 
-        this.partId = partId;
-        this.partName = new SimpleStringProperty(partName);
-        this.partInv = partInv;
-        this.partPrice = partPrice;
-
-    }
-*/
     public void setPartId(Integer partId) {
         this.partId = partId;
     }

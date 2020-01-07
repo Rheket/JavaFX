@@ -90,11 +90,6 @@ public class AddPartController implements Initializable {
             Inventory.addPart(o);
         }
 
-        //getInput.add(new Part(pId, pName, pPrice, pInv, pMax, pMin, pMC));
-
-        //
-        // MainWindowController.partsTableView.setItems(getInput);
-
         Parent addPartParent = FXMLLoader.load(getClass().getResource("/GUI/MainWindow.fxml"));
         Scene addPartScene = new Scene(addPartParent);
 

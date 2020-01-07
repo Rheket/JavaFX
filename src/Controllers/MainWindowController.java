@@ -22,15 +22,8 @@ import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
 
-    @FXML public Button addPartsButton;
-    @FXML public Button deletePartsButton;
-    @FXML public Button modifyPartsButton;
-    @FXML public Button searchPartsButton;
-    @FXML public Button searchProductsButton;
-    @FXML public Button addProductsButton;
-    @FXML public Button modifyProductsButton;
-    @FXML public Button deleteProductsButton;
     @FXML public TextField partToSearch;
+    @FXML public TextField productToSearch;
 
     //Sets up the parts table view
     @FXML private TableView<Part> partsTableView;
@@ -46,6 +39,13 @@ public class MainWindowController implements Initializable {
     @FXML private TableColumn<Product, Integer> productInvColumn;
     @FXML private TableColumn<Product, Double> productPriceColumn;
 
+    //Part to modify
+    private static Part partModify;
+    private static int partIndex;
+    //Product to modify
+    private static Product productModify;
+    private static int productIndex;
+
     public void updatePartsTable() {
 
         partsTableView.setItems(Inventory.getAllPartsList());
@@ -53,8 +53,8 @@ public class MainWindowController implements Initializable {
     }
 
     public static int selectedIndex() {
-        int index = -1;
-        return index;
+
+        return partIndex;
     }
 
     public void addParts(ActionEvent actionEvent) throws Exception{
@@ -70,6 +70,11 @@ public class MainWindowController implements Initializable {
 
     public void modifyParts(ActionEvent actionEvent) throws Exception{
 
+        //select part and get Index of selected part
+        partModify = partsTableView.getSelectionModel().getSelectedItem();
+        partIndex = Inventory.getAllPartsList().indexOf(partModify);
+
+        //change scenes to Modify Part screen
         Parent modifyPartsParent = FXMLLoader.load(getClass().getResource("/GUI/ModifyPart.fxml"));
         Scene modifyPartsScene = new Scene(modifyPartsParent);
 
@@ -91,6 +96,12 @@ public class MainWindowController implements Initializable {
     }
 
     public void modifyProducts(ActionEvent actionEvent) throws Exception{
+
+        //select product and get Index of selected part
+        productModify = productTableView.getSelectionModel().getSelectedItem();
+        productIndex = Inventory.getAllProductsList().indexOf(productModify);
+
+        //change scenes to Modify Products screen.
 
         Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/GUI/ModifyProduct.fxml"));
         Scene modifyProductsScene = new Scene(modifyProductsParent);
@@ -134,6 +145,9 @@ public class MainWindowController implements Initializable {
     }
 
     public void searchProducts(ActionEvent actionEvent) {
+
+        String search = productToSearch.getText();
+
     }
 
     public void deleteProducts(ActionEvent actionEvent) {

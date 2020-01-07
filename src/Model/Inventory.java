@@ -9,6 +9,7 @@ public class Inventory {
     public static ObservableList<Product> productInventory = FXCollections.observableArrayList();
 
     private static int partIdCount = 0;
+    private static int productIdCount = 0;
 
     public ObservableList<Part> getPartInventory() {
         return partInventory;
@@ -18,7 +19,7 @@ public class Inventory {
         partInventory.add(newPart);
     }
 
-    public void addProduct (Product newProduct) {
+    public static void addProduct (Product newProduct) {
         productInventory.add(newProduct);
     }
 
@@ -32,15 +33,14 @@ public class Inventory {
 
     public static ObservableList searchPart(String searchPartName) {
 
-        ObservableList<Part> foundParts = FXCollections.observableArrayList();
+        ObservableList<Part> foundParts;
+        foundParts = FXCollections.observableArrayList();
 
-        if (searchPartName.length() == 0) {
-            foundParts = partInventory;
-        } else {
+        if (searchPartName.length() == 0) foundParts = partInventory;
+        else {
             for (int i = 0; i < partInventory.size(); i++) {
-                if (partInventory.get(i).getPartName().toLowerCase().contains(searchPartName.toLowerCase())) {
+                if (partInventory.get(i).getPartName().toLowerCase().contains(searchPartName.toLowerCase()))
                     foundParts.add(partInventory.get(i));
-                }
             }
         }
 
@@ -50,6 +50,10 @@ public class Inventory {
 
     public static ObservableList<Part> getAllPartsList() {
         return partInventory;
+    }
+
+    public static ObservableList<Product> getAllProductsList() {
+        return productInventory;
     }
 
     public static int lookupPart(String searchTerm) {
@@ -102,6 +106,7 @@ public class Inventory {
     }
 
     public static void updatePart(int index, Part part) {
+
         partInventory.set(index, part);
     }
 
@@ -112,6 +117,11 @@ public class Inventory {
     public static int getPartId() {
         partIdCount += 1;
         return partIdCount;
+    }
+
+    public static int getProductId() {
+        productIdCount += 1;
+        return productIdCount;
     }
 
 }

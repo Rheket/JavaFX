@@ -16,7 +16,7 @@
             <Font name="System Bold" size="20.0" />
         </font>
     </Label>
-    <Button fx:id="exit" layoutX="873.0" layoutY="332.0" mnemonicParsing="false" onAction="#exitMainScreen" prefHeight="40.0" prefWidth="95.0" text="Exit">
+    <Button layoutX="873.0" layoutY="332.0" mnemonicParsing="false" onAction="#exitMainScreen" prefHeight="40.0" prefWidth="95.0" text="Exit">
         <font>
             <Font size="14.0" />
         </font>
@@ -36,7 +36,7 @@
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="modifyPartsButton" mnemonicParsing="false" onAction="#modifyParts" prefHeight="40.0" prefWidth="80.0" text="Modify">
+            <Button mnemonicParsing="false" onAction="#modifyParts" prefHeight="40.0" prefWidth="80.0" text="Modify">
                 <font>
                     <Font size="14.0" />
                 </font>
@@ -69,28 +69,28 @@
     </AnchorPane>
     <AnchorPane layoutX="509.0" layoutY="80.0" prefHeight="235.0" prefWidth="500.0" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="509.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="80.0">
         <HBox alignment="CENTER_LEFT" layoutX="235.0" layoutY="22.0" spacing="10.0">
-            <Button fx:id="searchProductsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchProducts" prefHeight="40.0" prefWidth="80.0" text="Search">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchProducts" prefHeight="40.0" prefWidth="80.0" text="Search">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
-            <TextField />
+            <TextField fx:id="productToSearch" />
         </HBox>
         <HBox layoutX="183.0" layoutY="181.0" spacing="10.0">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-            <Button fx:id="addProductsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addProducts" prefHeight="40.0" prefWidth="80.0" text="Add">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addProducts" prefHeight="40.0" prefWidth="80.0" text="Add">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="modifyProductsButton" mnemonicParsing="false" onAction="#modifyProducts" prefHeight="40.0" prefWidth="80.0" text="Modify">
+            <Button mnemonicParsing="false" onAction="#modifyProducts" prefHeight="40.0" prefWidth="80.0" text="Modify">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="deleteProductsButton" mnemonicParsing="false" onAction="#deleteProducts" prefHeight="40.0" prefWidth="80.0" text="Delete">
+            <Button mnemonicParsing="false" onAction="#deleteProducts" prefHeight="40.0" prefWidth="80.0" text="Delete">
                 <font>
                     <Font size="14.0" />
                 </font>
@@ -101,12 +101,12 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <TableView fx:id="productsTableView" layoutX="24.0" layoutY="68.0" prefHeight="100.0" prefWidth="450.0">
+        <TableView fx:id="productTableView" layoutX="24.0" layoutY="68.0" prefHeight="100.0" prefWidth="450.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="Product ID" />
-                <TableColumn prefWidth="75.0" text="Product Name" />
-                <TableColumn prefWidth="75.0" text="Inventory Level" />
-                <TableColumn prefWidth="75.0" text="Price per Unit" />
+                <TableColumn fx:id="productIdColumn" prefWidth="75.0" text="Product ID" />
+                <TableColumn fx:id="productNameColumn" prefWidth="75.0" text="Product Name" />
+                <TableColumn fx:id="productInvColumn" prefWidth="75.0" text="Inventory Level" />
+                <TableColumn fx:id="productPriceColumn" prefWidth="75.0" text="Price per Unit" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
