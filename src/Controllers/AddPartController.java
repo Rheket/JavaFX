@@ -56,7 +56,7 @@ public class AddPartController implements Initializable {
 
             InHouse p = new InHouse();
 
-            p.setPartId(Integer.parseInt(partId.getText()));
+            //p.setPartId(Integer.parseInt(partId.getText()));
             p.setPartName(this.partName.getText());
             p.setPartInv(Integer.parseInt(this.partInv.getText()));
             p.setPartPrice(Double.parseDouble(this.partPrice.getText()));
@@ -66,15 +66,18 @@ public class AddPartController implements Initializable {
 
             if (this.partId.getText().length() == 0) {
                 p.setPartId(Inventory.getPartId());
+                Inventory.addPart(p);
             } else {
                 p.setPartId(Integer.parseInt(this.partId.getText()));
+                Inventory.updatePart(MainWindowController.selectedIndex(), p);
             }
-            Inventory.addPart(p);
+
 
 
         } else {
             Outsourced o = new Outsourced();
 
+            //o.setPartId(Integer.parseInt(partId.getText()));
             o.setPartName(this.partName.getText());
             o.setPartInv(Integer.parseInt(this.partInv.getText()));
             o.setPartPrice(Double.parseDouble(this.partPrice.getText()));
@@ -84,11 +87,14 @@ public class AddPartController implements Initializable {
 
             if (this.partId.getText().length() == 0) {
                 o.setPartId(Inventory.getPartId());
+                Inventory.addPart(o);
             } else {
                 o.setPartId(Integer.parseInt(this.partId.getText()));
+                Inventory.updatePart(MainWindowController.selectedIndex(), o);
             }
-            Inventory.addPart(o);
+
         }
+
 
         Parent addPartParent = FXMLLoader.load(getClass().getResource("/GUI/MainWindow.fxml"));
         Scene addPartScene = new Scene(addPartParent);
@@ -105,12 +111,12 @@ public class AddPartController implements Initializable {
     public void radioButtonChanged() {
 
         if
-            (this.outsourcedToggleGroup.getSelectedToggle().equals(inHouseRadioButton))
+        (this.outsourcedToggleGroup.getSelectedToggle().equals(inHouseRadioButton))
             machineIdLabel.setText("Machine ID");
 
 
         if
-            (this.outsourcedToggleGroup.getSelectedToggle().equals(outsourcedRadioButton))
+        (this.outsourcedToggleGroup.getSelectedToggle().equals(outsourcedRadioButton))
             machineIdLabel.setText("Company Name");
 
     }

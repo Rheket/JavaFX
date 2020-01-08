@@ -60,17 +60,17 @@ public class ModifyPartController implements Initializable {
 
         if (this.outsourcedToggleGroup.getSelectedToggle().equals(this.inHouseRadioButton)) {
 
-            InHouse mPart = new InHouse();
+            InHouse iPart = new InHouse();
 
-            mPart.setPartId(Integer.parseInt(pId));
-            mPart.setPartName(pName);
-            mPart.setPartInv(Integer.parseInt(pInv));
-            mPart.setPartPrice(Double.parseDouble(pPrice));
-            mPart.setPartMax((Integer.parseInt(pMax)));
-            mPart.setPartMin(Integer.parseInt(pMin));
-            mPart.setMachineId(Integer.parseInt(pMachOrCompID));
+            iPart.setPartId(Integer.parseInt(pId));
+            iPart.setPartName(pName);
+            iPart.setPartInv(Integer.parseInt(pInv));
+            iPart.setPartPrice(Double.parseDouble(pPrice));
+            iPart.setPartMax((Integer.parseInt(pMax)));
+            iPart.setPartMin(Integer.parseInt(pMin));
+            iPart.setMachineId(Integer.parseInt(pMachOrCompID));
 
-            Inventory.updatePart(mIndex, mPart);
+            Inventory.updatePart(mIndex, iPart);
 
         } else {
 

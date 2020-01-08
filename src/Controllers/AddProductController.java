@@ -3,9 +3,6 @@ package Controllers;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import static Model.Product.associatedParts;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +42,7 @@ public class AddProductController implements Initializable {
     @FXML private TableColumn<Part, Double> partPriceColumn;
 
     // associated parts table view
-    @FXML private TableView<Part> associatedParts;
+    @FXML private TableView<Part> associatedPartsTableView;
     @FXML private TableColumn<Part, Integer> associatedPartIdColumn;
     @FXML private TableColumn<Part, String> associatedPartNameColumn;
     @FXML private TableColumn<Part, Integer> associatedPartInvColumn;
@@ -51,23 +50,23 @@ public class AddProductController implements Initializable {
 
     public void saveProductButton(ActionEvent actionEvent) throws IOException {
 
-        Product prod = new Product();
+        Product pr = new Product();
 
-        prod.setProductId(Integer.parseInt(productId.getText()));
-        prod.setProductName(this.productName.getText());
-        prod.setProductStock(Integer.parseInt(this.productInv.getText()));
-        prod.setProductPrice(Double.parseDouble(this.productPrice.getText()));
-        prod.setProductMax(Integer.parseInt(this.productMax.getText()));
-        prod.setProductMin(Integer.parseInt(this.productMin.getText()));
+        //pr.setProductId(Integer.parseInt(productId.getText()));
+        pr.setProductName(this.productName.getText());
+        pr.setProductStock(Integer.parseInt(this.productInv.getText()));
+        pr.setProductPrice(Double.parseDouble(this.productPrice.getText()));
+        pr.setProductMax(Integer.parseInt(this.productMax.getText()));
+        pr.setProductMin(Integer.parseInt(this.productMin.getText()));
 
-        prod.setAssociatedParts(Product.associatedParts);
+        //Product.setAssociatedParts(associatedParts);
 
         if (this.productId.getText().length() == 0) {
-            prod.setProductId(Inventory.getProductId());
-            Inventory.addProduct(prod);
+            pr.setProductId(Inventory.getProductId());
+            Inventory.addProduct(pr);
         } else {
-            prod.setProductId(Integer.parseInt(this.productId.getText()));
-            Inventory.updateProduct(MainWindowController.selectedIndex(), prod);
+            pr.setProductId(Integer.parseInt(this.productId.getText()));
+            Inventory.updateProduct(MainWindowController.selectedIndex(), pr);
         }
 
         Parent saveProductParent = FXMLLoader.load(getClass().getResource("/GUI/MainWindow.fxml"));
@@ -91,6 +90,14 @@ public class AddProductController implements Initializable {
     }
 
     public void deleteProductButton(ActionEvent actionEvent) {
+
+        Part selectedPart = associatedPartsTableView.getSelectionModel().getSelectedItem();
+
+        if(selectedPart != null) {
+            associatedParts.remove(selectedPart);
+            associatedPartsTableView.setItems(associatedParts);
+        }
+
     }
 
     public void addProductButton(ActionEvent actionEvent) {
@@ -99,7 +106,8 @@ public class AddProductController implements Initializable {
 
         if (selectedPart != null) {
             Product.associatedParts.add(selectedPart);
-            addAssociatedPart();
+            associatedPartsTableView.setItems(associatedParts);
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
@@ -117,23 +125,22 @@ public class AddProductController implements Initializable {
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("partName"));
         partInvColumn.setCellValueFactory(new PropertyValueFactory<>("partInv"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+
         partsTableView.setItems(Inventory.getAllPartsList());
 
         //set up associated parts table
-        associatedPartIdColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("associatedPartId"));
-        associatedPartNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("associatedPartName"));
-        associatedPartInvColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("associatedPartInv"));
-        associatedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("associatedPartPrice"));
-        associatedParts.setItems(Product.getAllAssociatedParts());
+        associatedPartIdColumn.setCellValueFactory(new PropertyValueFactory<>("partId"));
+        associatedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("PartName"));
+        associatedPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("PartInv"));
+        associatedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("PartPrice"));
 
-        addAssociatedPart();
+        associatedPartsTableView.setItems(Product.associatedParts);
 
+        partsTableView.setItems(Inventory.getAllPartsList());
 
+        associatedPartsTableView.setItems(associatedParts);
 
     }
 
-    private void addAssociatedPart() {
-        associatedParts.setItems(Product.associatedParts);
-    }
 
 }

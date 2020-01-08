@@ -29,7 +29,7 @@ public class Product {
     }
 
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -37,19 +37,19 @@ public class Product {
         this.productName = productName;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
-    public void setProductStock(int productStock) {
+    public void setProductStock(Integer productStock) {
         this.productStock = productStock;
     }
 
-    public void setProductMin(int productMin) {
+    public void setProductMin(Integer productMin) {
         this.productMin = productMin;
     }
 
-    public void setProductMax(int productMax) {
+    public void setProductMax(Integer productMax) {
         this.productMax = productMax;
     }
 
@@ -90,17 +90,13 @@ public class Product {
 
     public static ObservableList getAllAssociatedParts() {
 
-        ObservableList<Part> associatedParts;
-        associatedParts = FXCollections.observableArrayList();
-
-
         return associatedParts;
 
     }
 
-    public static void setAssociatedParts(ObservableList<Part> associatedParts) {
+    public static void setAssociatedParts(ObservableList<Part> aParts) {
 
-        associatedParts = associatedParts;
+        associatedParts = aParts;
 
     }
 

@@ -110,8 +110,8 @@ public class Inventory {
         partInventory.set(index, part);
     }
 
-    public static void updateProduct(int productToUpdate, Product updateProduct) {
-        productInventory.set(productToUpdate, updateProduct);
+    public static void updateProduct(int index, Product product) {
+        productInventory.set(index, product);
     }
 
     public static int getPartId() {

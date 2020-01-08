@@ -41,7 +41,7 @@
         </Label>
         <VBox layoutX="221.0" layoutY="118.0" spacing="21.0">
             <children>
-                <TextField fx:id="partId" prefHeight="25.0" prefWidth="130.0" />
+                <TextField fx:id="partId" disable="true" promptText="Auto Gen - Disabled" prefHeight="25.0" prefWidth="130.0" />
                 <TextField fx:id="partName" prefHeight="25.0" prefWidth="130.0" />
                 <TextField fx:id="partInv" prefHeight="25.0" prefWidth="130.0" />
                 <TextField fx:id="partPrice" prefHeight="25.0" prefWidth="130.0" />

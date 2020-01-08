@@ -55,7 +55,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <TableView fx:id="associatedParts" layoutX="341.0" layoutY="274.0" prefHeight="134.0" prefWidth="438.0">
+        <TableView fx:id="associatedPartsTableView" layoutX="341.0" layoutY="274.0" prefHeight="134.0" prefWidth="438.0">
             <columns>
                 <TableColumn fx:id="associatedPartIdColumn" prefWidth="75.0" text="Part ID" />
                 <TableColumn fx:id="associatedPartNameColumn" prefWidth="75.0" text="Part Name" />
