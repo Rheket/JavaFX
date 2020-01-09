@@ -3,6 +3,7 @@ package Controllers;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,7 @@ public class AddProductController implements Initializable {
     @FXML private TextField productPrice;
     @FXML private TextField productMax;
     @FXML private TextField productMin;
+    @FXML private TextField addProductSearchBox;
     //@FXML private TextField productMachOrCompID;
 
     // parts table view
@@ -50,23 +52,30 @@ public class AddProductController implements Initializable {
 
     public void saveProductButton(ActionEvent actionEvent) throws IOException {
 
-        Product pr = new Product();
+        Product prod = new Product();
 
-        //pr.setProductId(Integer.parseInt(productId.getText()));
-        pr.setProductName(this.productName.getText());
-        pr.setProductStock(Integer.parseInt(this.productInv.getText()));
-        pr.setProductPrice(Double.parseDouble(this.productPrice.getText()));
-        pr.setProductMax(Integer.parseInt(this.productMax.getText()));
-        pr.setProductMin(Integer.parseInt(this.productMin.getText()));
+        //int pId = Integer.parseInt(this.productId.getText());
+        String pName = this.productName.getText();
+        int pInv = Integer.parseInt(this.productInv.getText());
+        double pPrice = Double.parseDouble(this.productPrice.getText());
+        int pMax = Integer.parseInt(this.productMax.getText());
+        int pMin = Integer.parseInt(this.productMin.getText());
+
+        //prod.setProductId(pId);
+        prod.setProductName(pName);
+        prod.setProductStock(pInv);
+        prod.setProductPrice(pPrice);
+        prod.setProductMax(pMax);
+        prod.setProductMin(pMin);
 
         //Product.setAssociatedParts(associatedParts);
 
         if (this.productId.getText().length() == 0) {
-            pr.setProductId(Inventory.getProductId());
-            Inventory.addProduct(pr);
+            prod.setProductId(Inventory.getProductId());
+            Inventory.addProduct(prod);
         } else {
-            pr.setProductId(Integer.parseInt(this.productId.getText()));
-            Inventory.updateProduct(MainWindowController.selectedIndex(), pr);
+            prod.setProductId(Integer.parseInt(this.productId.getText()));
+            Inventory.updateProduct(MainWindowController.selectedIndex(), prod);
         }
 
         Parent saveProductParent = FXMLLoader.load(getClass().getResource("/GUI/MainWindow.fxml"));
@@ -117,6 +126,23 @@ public class AddProductController implements Initializable {
 
     }
 
+    public void searchPartToAdd() {
+
+        String search = addProductSearchBox.getText();
+
+        ObservableList foundParts = Inventory.searchPart(search);
+        if (foundParts.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No match found");
+            alert.setHeaderText("No part found matching " + search);
+            alert.showAndWait();
+        } else {
+            partsTableView.setItems(foundParts);
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -134,11 +160,13 @@ public class AddProductController implements Initializable {
         associatedPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("PartInv"));
         associatedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("PartPrice"));
 
-        associatedPartsTableView.setItems(Product.associatedParts);
+        // CHANGED THIS, this loads the associated parts table.
+        //associatedPartsTableView.setItems(Product.associatedParts);
 
         partsTableView.setItems(Inventory.getAllPartsList());
 
-        associatedPartsTableView.setItems(associatedParts);
+        //associatedPartsTableView.setItems(associatedParts);
+        associatedPartsTableView.refresh();
 
     }
 

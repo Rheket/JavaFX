@@ -2,7 +2,7 @@ package Model;
 
 public class Outsourced extends Part{
 
-    private String companyName;
+    private static String companyName;
 
     public Outsourced() {
         this(0, null, 0, 0.0, 0, 0, null);
@@ -20,7 +20,7 @@ public class Outsourced extends Part{
 
     }
 
-    public String getCompanyName() {
+    public static String getCompanyName() {
 
         return companyName;
 

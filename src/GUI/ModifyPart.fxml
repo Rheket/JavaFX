@@ -41,7 +41,7 @@
         </Label>
         <VBox layoutX="221.0" layoutY="118.0" spacing="21.0">
             <children>
-                <TextField fx:id="modifyPartId" prefHeight="25.0" prefWidth="130.0" />
+                <TextField fx:id="modifyPartId" disable="true" prefHeight="25.0" prefWidth="130.0" />
                 <TextField fx:id="modifyPartName" prefHeight="25.0" prefWidth="130.0" />
                 <TextField fx:id="modifyPartInv" prefHeight="25.0" prefWidth="130.0" />
                 <TextField fx:id="modifyPartPrice" prefHeight="25.0" prefWidth="130.0" />

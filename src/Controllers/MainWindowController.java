@@ -22,15 +22,9 @@ import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
 
-    @FXML public Button addPartsButton;
-    @FXML public Button deletePartsButton;
-    @FXML public Button modifyPartsButton;
-    @FXML public Button searchPartsButton;
-    @FXML public Button searchProductsButton;
-    @FXML public Button addProductsButton;
-    @FXML public Button modifyProductsButton;
-    @FXML public Button deleteProductsButton;
+
     @FXML public TextField partToSearch;
+    @FXML public TextField productToSearch;
 
     //Sets up the parts table view
     @FXML private TableView<Part> partsTableView;
@@ -56,7 +50,7 @@ public class MainWindowController implements Initializable {
     }
 
     public static int selectedIndex() {
-        int index = -1;
+        int index = 0;
         return index;
     }
 
@@ -74,12 +68,22 @@ public class MainWindowController implements Initializable {
     public void modifyParts(ActionEvent actionEvent) throws Exception{
 
         //select part and get Index of selected part
-        //partModify = partsTableView.getSelectionModel().getSelectedItem();
-        //partIndex = Inventory.getAllPartsList().indexOf(partModify);
+        partModify = partsTableView.getSelectionModel().getSelectedItem();
+        partIndex = Inventory.getAllPartsList().indexOf(partModify);
 
         //change scenes to Modify Part screen
-        Parent modifyPartsParent = FXMLLoader.load(getClass().getResource("/GUI/ModifyPart.fxml"));
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/GUI/ModifyPart.fxml"));
+        Parent modifyPartsParent =loader.load();
+
+        //Parent modifyPartsParent = FXMLLoader.load(getClass().getResource("/GUI/ModifyPart.fxml"));
         Scene modifyPartsScene = new Scene(modifyPartsParent);
+
+        //access controller and initialize modify parts window
+
+        ModifyPartController controller = loader.getController();
+        controller.initData(partsTableView.getSelectionModel().getSelectedItem());
 
         Stage modifyPartsWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         modifyPartsWindow.setScene(modifyPartsScene);
@@ -141,10 +145,24 @@ public class MainWindowController implements Initializable {
 
     }
 
-    public void searchProducts(ActionEvent actionEvent) {
+    public void searchProducts() {
+
+        String search = productToSearch.getText();
+
+        ObservableList foundProducts = Inventory.searchProduct(search);
+        if (foundProducts.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No match found");
+            alert.setHeaderText("No part found matching " + search);
+            alert.showAndWait();
+        } else {
+            productTableView.setItems(foundProducts);
+        }
+
     }
 
-    public void deleteProducts(ActionEvent actionEvent) {
+    public void deleteProducts() {
 
         ObservableList<Product> selectedProducts, allProducts;
         allProducts = productTableView.getItems();
@@ -175,7 +193,8 @@ public class MainWindowController implements Initializable {
         //Inventory.addPart(new InHouse(Inventory.getPartId(), "Handle Bars", 50, 49.99, 50, 1, 1));
         //Inventory.addPart(new InHouse(Inventory.getPartId(), "Wheels", 100, 24.99, 100, 1, 2));
 
-        //initialize products
+        //initialize products CHANGED THIS
+
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
         productInvColumn.setCellValueFactory(new PropertyValueFactory<>("productStock"));

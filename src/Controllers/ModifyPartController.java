@@ -3,6 +3,8 @@ package Controllers;
 import Model.InHouse;
 import Model.Inventory;
 import Model.Outsourced;
+import Model.Part;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +38,8 @@ public class ModifyPartController implements Initializable {
     @FXML private TextField modifyPartMachOrCompID;
 
     int mIndex = MainWindowController.selectedIndex();
+
+    private Part selectedP;
 
     public void cancelModifyPart(ActionEvent actionEvent) throws Exception{
 
@@ -122,6 +126,31 @@ public class ModifyPartController implements Initializable {
         this.outsourcedRadioButton.setToggleGroup(outsourcedToggleGroup);
 
         inHouseRadioButton.setSelected(true);
+    }
+
+    public void initData (Part part) {
+
+        selectedP = part;
+
+        modifyPartId.setText(String.valueOf(selectedP.getPartId()));
+        modifyPartName.setText(selectedP.getPartName());
+        modifyPartInv.setText(String.valueOf(selectedP.getPartInv()));
+        modifyPartPrice.setText(String.valueOf(selectedP.getPartPrice()));
+        modifyPartMax.setText(String.valueOf(selectedP.getPartMax()));
+        modifyPartMin.setText(String.valueOf(selectedP.getPartMin()));
+
+
+        if(part instanceof InHouse) {
+
+            inHouseRadioButton.setSelected(true);
+            modifyPartMachOrCompID.setText(String.valueOf(InHouse.getMachineId()));
+
+        } else {
+
+            outsourcedRadioButton.setSelected(true);
+            modifyPartMachOrCompID.setText(String.valueOf(Outsourced.getCompanyName()));
+
+        }
     }
 
 }

@@ -9,7 +9,7 @@ public class Inventory {
     public static ObservableList<Product> productInventory = FXCollections.observableArrayList();
 
     private static int partIdCount = 0;
-    private static int productIdCount = 0;
+    private static int productId = 0;
 
     public ObservableList<Part> getPartInventory() {
         return partInventory;
@@ -101,17 +101,32 @@ public class Inventory {
 
     }
 
-    public void searchProduct(Product searchProduct) {
+    public static ObservableList searchProduct(String searchProduct) {
+
+        ObservableList<Product> foundProduct;
+        foundProduct = FXCollections.observableArrayList();
+
+        if (searchProduct.length() == 0) foundProduct = productInventory;
+        else {
+            for (int i = 0; i < productInventory.size(); i++) {
+                if (productInventory.get(i).getProductName().toLowerCase().contains(searchProduct.toLowerCase())) {
+                    foundProduct.add(productInventory.get(i));
+                }
+            }
+        }
+
+        return foundProduct;
 
     }
 
     public static void updatePart(int index, Part part) {
 
         partInventory.set(index, part);
+
     }
 
-    public static void updateProduct(int index, Product product) {
-        productInventory.set(index, product);
+    public static void updateProduct(int productToUpdate, Product updateProduct) {
+        productInventory.set(productToUpdate, updateProduct);
     }
 
     public static int getPartId() {
@@ -120,8 +135,8 @@ public class Inventory {
     }
 
     public static int getProductId() {
-        productIdCount += 1;
-        return productIdCount;
+        productId += 1;
+        return productId;
     }
 
 }

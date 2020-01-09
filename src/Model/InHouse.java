@@ -2,7 +2,7 @@ package Model;
 
 public class InHouse extends Part{
 
-    private int machineId;
+    private static int machineId;
 
     public InHouse() {
         this(0, null, 0, 0.0, 0, 0, 0);
@@ -21,7 +21,7 @@ public class InHouse extends Part{
         this.machineId = machineId;
     }
 
-    public int getMachineId() {
+    public static int getMachineId() {
         return machineId;
     }
 }
