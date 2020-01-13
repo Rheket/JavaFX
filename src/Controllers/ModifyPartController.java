@@ -39,8 +39,6 @@ public class ModifyPartController implements Initializable {
 
     int mIndex = MainWindowController.selectedIndex();
 
-    private Part selectedP;
-
     public void cancelModifyPart(ActionEvent actionEvent) throws Exception{
 
         Parent cancelModifyParent = FXMLLoader.load(getClass().getResource("/GUI/MainWindow.fxml"));
@@ -130,14 +128,12 @@ public class ModifyPartController implements Initializable {
 
     public void initData (Part part) {
 
-        selectedP = part;
-
-        modifyPartId.setText(String.valueOf(selectedP.getPartId()));
-        modifyPartName.setText(selectedP.getPartName());
-        modifyPartInv.setText(String.valueOf(selectedP.getPartInv()));
-        modifyPartPrice.setText(String.valueOf(selectedP.getPartPrice()));
-        modifyPartMax.setText(String.valueOf(selectedP.getPartMax()));
-        modifyPartMin.setText(String.valueOf(selectedP.getPartMin()));
+        modifyPartId.setText(String.valueOf(part.getPartId()));
+        modifyPartName.setText(part.getPartName());
+        modifyPartInv.setText(String.valueOf(part.getPartInv()));
+        modifyPartPrice.setText(String.valueOf(part.getPartPrice()));
+        modifyPartMax.setText(String.valueOf(part.getPartMax()));
+        modifyPartMin.setText(String.valueOf(part.getPartMin()));
 
 
         if(part instanceof InHouse) {

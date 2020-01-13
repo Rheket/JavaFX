@@ -72,7 +72,6 @@ public class MainWindowController implements Initializable {
         partIndex = Inventory.getAllPartsList().indexOf(partModify);
 
         //change scenes to Modify Part screen
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/ModifyPart.fxml"));
         Parent modifyPartsParent =loader.load();
@@ -81,9 +80,9 @@ public class MainWindowController implements Initializable {
         Scene modifyPartsScene = new Scene(modifyPartsParent);
 
         //access controller and initialize modify parts window
-
         ModifyPartController controller = loader.getController();
-        controller.initData(partsTableView.getSelectionModel().getSelectedItem());
+        controller.initData(partModify);
+        controller.mIndex = partIndex;
 
         Stage modifyPartsWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         modifyPartsWindow.setScene(modifyPartsScene);
