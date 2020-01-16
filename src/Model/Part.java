@@ -2,9 +2,9 @@ package Model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Part {
+public abstract class Part {
 
-    private int partId;
+    protected int partId;
     private String partName;
     private double partPrice;
     private int partInv;
@@ -12,17 +12,18 @@ public class Part {
     private int partMax;
 
     public Part() {
-        this(0, null, 0, 0.0, 0, 0);
+        this(0, null, 0, 0.0,0,0);
     }
 
     public Part(int partId, String partName, int partInv, double partPrice, int partMax, int partMin) {
 
         this.partId = partId;
         this.partName = partName;
-        this.partPrice = partPrice;
         this.partInv = partInv;
+        this.partPrice = partPrice;
         this.partMax = partMax;
         this.partMin = partMin;
+
 
     }
 
@@ -50,7 +51,7 @@ public class Part {
         this.partMax = partMax;
     }
 
-    public Integer getPartId() {
+    public int getPartId() {
         return partId;
     }
 
@@ -58,19 +59,19 @@ public class Part {
         return partName;
     }
 
-    public Double getPartPrice() {
+    public double getPartPrice() {
         return partPrice;
     }
 
-    public Integer getPartInv() {
+    public int getPartInv() {
         return partInv;
     }
 
-    public Integer getPartMin() {
+    public int getPartMin() {
         return partMin;
     }
 
-    public Integer getPartMax() {
+    public int getPartMax() {
         return partMax;
     }
 

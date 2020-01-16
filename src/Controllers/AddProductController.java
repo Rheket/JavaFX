@@ -3,6 +3,7 @@ package Controllers;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import static Model.Product.associatedParts;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,6 +50,8 @@ public class AddProductController implements Initializable {
     @FXML private TableColumn<Part, Integer> associatedPartInvColumn;
     @FXML private TableColumn<Part, Double> associatedPartPriceColumn;
 
+    private ObservableList<Part> productPartsList = FXCollections.observableArrayList();
+
     public void saveProductButton(ActionEvent actionEvent) throws IOException {
 
         Product prod = new Product();
@@ -67,6 +69,7 @@ public class AddProductController implements Initializable {
         prod.setProductPrice(pPrice);
         prod.setProductMax(pMax);
         prod.setProductMin(pMin);
+        prod.setAssociatedParts(productPartsList);
 
         //Product.setAssociatedParts(associatedParts);
 
@@ -103,8 +106,8 @@ public class AddProductController implements Initializable {
         Part selectedPart = associatedPartsTableView.getSelectionModel().getSelectedItem();
 
         if(selectedPart != null) {
-            associatedParts.remove(selectedPart);
-            associatedPartsTableView.setItems(associatedParts);
+            productPartsList.remove(selectedPart);
+            associatedPartsTableView.setItems(productPartsList);
         }
 
     }
@@ -114,8 +117,8 @@ public class AddProductController implements Initializable {
         Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
 
         if (selectedPart != null) {
-            Product.associatedParts.add(selectedPart);
-            associatedPartsTableView.setItems(associatedParts);
+            productPartsList.add(selectedPart);
+            associatedPartsTableView.setItems(productPartsList);
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

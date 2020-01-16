@@ -43,6 +43,9 @@ public class MainWindowController implements Initializable {
     private static Part partModify;
     private static int partIndex;
 
+    private static Product productModify;
+    private static int productIndex;
+
     public void updatePartsTable() {
 
         partsTableView.setItems(Inventory.getAllPartsList());
@@ -52,6 +55,10 @@ public class MainWindowController implements Initializable {
     public static int selectedIndex() {
         int index = 0;
         return index;
+    }
+
+    public static int modifyProductIndex() {
+        return productIndex;
     }
 
     public void addParts(ActionEvent actionEvent) throws Exception{
@@ -74,7 +81,7 @@ public class MainWindowController implements Initializable {
         //change scenes to Modify Part screen
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/ModifyPart.fxml"));
-        Parent modifyPartsParent =loader.load();
+        Parent modifyPartsParent = loader.load();
 
         //Parent modifyPartsParent = FXMLLoader.load(getClass().getResource("/GUI/ModifyPart.fxml"));
         Scene modifyPartsScene = new Scene(modifyPartsParent);
@@ -103,8 +110,22 @@ public class MainWindowController implements Initializable {
 
     public void modifyProducts(ActionEvent actionEvent) throws Exception{
 
-        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/GUI/ModifyProduct.fxml"));
+        //select product and get Index of selected product
+        productModify = productTableView.getSelectionModel().getSelectedItem();
+        productIndex = Inventory.getAllProductsList().indexOf(productModify);
+
+        //change scenes to Modify Part screen
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/GUI/ModifyProduct.fxml"));
+        Parent modifyProductsParent = loader.load();
+
+        //Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/GUI/ModifyProduct.fxml"));
         Scene modifyProductsScene = new Scene(modifyProductsParent);
+
+        //access controller and initialize parts for product
+        ModifyProductController controller = loader.getController();
+        controller.addProductParts(productModify);
+        controller.modifyProductIndex = productIndex;
 
         Stage modifyProductsWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         modifyProductsWindow.setScene(modifyProductsScene);
